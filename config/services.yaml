@@ -4,6 +4,29 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    images_directory: '%kernel.project_dir%/public/uploads'
+    maintenanceFilePath: '%kernel.project_dir%/public/.maintenance'
+    locale: 'fr'
+    envTest: 1
+    link_site: 'http://daos-cnt.com'
+    link_site_short: daos-cnt.com
+    link_landing: 'http://daos-cnt.com/lien'
+    mail_contact: 'dao.cnt@outlook.fr'
+    tel_contact: '0646076660'
+    name_repo: Dccg
+    name_site: daos-cnt.com
+#    mail_boss: 'dao.cnt@outlook.fr'
+#    dateCreate: '2020-10-21'
+    societe: 'DCCG'
+    societe_street: '3 route de Mandres'
+    societe_city: 'Brie Comte Robert'
+    societe_cp: '77170'
+    societe_country: 'France'
+    siren: ''
+    facebook: ''
+    github: ''
+    linkedin: ''
+    nameSiteConfig: dccg_
 
 services:
     # default configuration for services in *this* file
@@ -11,6 +34,10 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    App\Controller\HomeController:
+        tags: ['controller.service_arguments']
+        arguments:
+            $twig: '@twig'
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:

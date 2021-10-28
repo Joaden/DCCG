@@ -16,17 +16,28 @@
         <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/SYMFONY/DCCG/dccg/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
         <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/SYMFONY/DCCG/dccg/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
     </ul>
+    <h2> {{ "now"|date('d/m/Y', "Europe/Paris") }}</h2>
 </div>
 
-    {#<section class="articles">#}
+<section class="articles">
 
-
+    <div class="row">
     {% for article in articles %}
         {{ loop.index }}
         {#<div class="container">#}
-        <div class="col-12 ">
-            <div class="row border border-dark rounded p-2">
-                <div class="col-md-6">
+        
+            <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h3>{{ article.title }}</h3>
+
+                    <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random/500x300" alt="image here"><a href="#"></a>
+                    <p class="card-text">
+                        {{ article.content }}
+                    </p>
+                    <span class="grey_dark">
+                        Edité le  articles.date | date('d/m/Y')  à  articles.date | date('H:i')  dans la rubrique  articles.categorie_id
+                    </span>
                     {#<div class="col-3 mb-3 ">#}
                     {#<img src="http://placehold.it/350x150" alt=""/>#}
                     {#{% for image in post.images %}#}
@@ -34,18 +45,8 @@
                             {#<img data-ax="lightbox" data-lightbox-caption="This is a caption" id="example-lightbox2" class="lightbox responsive-media" src="{{ asset('/uploads/'~image.name) }}" alt="img{{ image.id }}" width="150"/>#}
                         {#</div>#}
                     {#{% endfor %}#}
-                    {{ "now"|date('d/m/Y', "Europe/Paris") }}
-                    <div class="metadata"> Edité le {{ articles.date | date('d/m/Y') }} à {{ articles.date | date('H:i') }} dans la rubrique {{ articles.categorie }}
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    {#<div class="col-md-6 m_top_90">#}
-                    <h2>{{ article.title }}</h2>
-                    <div class="text">
-                        <span class="grey_dark">{{ article.content }}</span>
-                        <br />
-                        Découvrez ici les contenus dans nos dernières actualités
-                    </div>
+
+
                     <div>
                         {#<button type="button" class="btn btn-success txt-white">#}
                         <a href="#" class="btn btn-success txt-white">
@@ -87,32 +88,9 @@
             </div>
         </div>
     {% endfor %}
-    <span class="badge badge-pill badge-primary">Primary</span>
-    <span class="badge badge-pill badge-secondary">Secondary</span>
-    <span class="badge badge-pill badge-success">Success</span>
-    <span class="badge badge-pill badge-danger">Danger</span>
-    <span class="badge badge-pill badge-warning">Warning</span>
-    <span class="badge badge-pill badge-info">Info</span>
-    <span class="badge badge-pill badge-light">Light</span>
-    <span class="badge badge-pill badge-dark">Dark</span>
-    <hr class="hr_grey">
 
-    {#{% if posts is defined %}#}
-    {#{% for post in posts %}#}
-    {#<article>#}
-    {#<h2>{{ post.title }}</h2>#}
-    {#<img src="http://placehold.it/350x150" alt=""/>#}
-    {#<div class="metadata">Ecrit le {{ post.createdAt | date('d/m/Y') }} à {{ post.createdAt | date('H:i') }} dans la categorie sport#}
-    {#</div>#}
-    {#<div class="content">#}
-    {#{% if post.image is defined %}<img src="{{ post.image }}" alt="">{% endif %}#}
-    {#{{ post.content | raw }}#}
-    {#<a href="{{ path('post_show1', {'id': post.id}) }}" class="btn btn-primary">Lire la suite</a>#}
-    {#</div>#}
-    {#</article>#}
-    {#{% endfor %}#}
-    {#{% endif %}#}
-    {#</section>#}
+
+</section>
 
 
 
