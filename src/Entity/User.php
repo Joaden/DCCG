@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -34,6 +38,73 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pseudo;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $phrase;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Articles::class, mappedBy="auteur")
+     */
+    private $articles;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Follow::class, mappedBy="follower")
+     */
+    private $follows;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="auteur")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToOne(targetEntity=UsersInfos::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $usersInfos;
+
+    /**
+     * @ORM\OneToOne(targetEntity=UsersAddress::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $usersAddress;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Ranking::class, mappedBy="user")
+     */
+    private $rankings;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $gender;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->rankings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -123,4 +194,230 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function getPhrase(): ?string
+    {
+        return $this->phrase;
+    }
+
+    public function setPhrase(?string $phrase): self
+    {
+        $this->phrase = $phrase;
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Articles[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getAuteur() === $this) {
+                $article->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Follow[]
+     */
+    public function getFollows(): Collection
+    {
+        return $this->follows;
+    }
+
+    public function addFollow(Follow $follow): self
+    {
+        if (!$this->follows->contains($follow)) {
+            $this->follows[] = $follow;
+            $follow->addFollower($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollow(Follow $follow): self
+    {
+        if ($this->follows->removeElement($follow)) {
+            $follow->removeFollower($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getAuteur() === $this) {
+                $comment->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUsersInfos(): ?UsersInfos
+    {
+        return $this->usersInfos;
+    }
+
+    public function setUsersInfos(UsersInfos $usersInfos): self
+    {
+        // set the owning side of the relation if necessary
+        if ($usersInfos->getUser() !== $this) {
+            $usersInfos->setUser($this);
+        }
+
+        $this->usersInfos = $usersInfos;
+
+        return $this;
+    }
+
+    public function getUsersAddress(): ?UsersAddress
+    {
+        return $this->usersAddress;
+    }
+
+    public function setUsersAddress(UsersAddress $usersAddress): self
+    {
+        // set the owning side of the relation if necessary
+        if ($usersAddress->getUser() !== $this) {
+            $usersAddress->setUser($this);
+        }
+
+        $this->usersAddress = $usersAddress;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ranking[]
+     */
+    public function getRankings(): Collection
+    {
+        return $this->rankings;
+    }
+
+    public function addRanking(Ranking $ranking): self
+    {
+        if (!$this->rankings->contains($ranking)) {
+            $this->rankings[] = $ranking;
+            $ranking->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRanking(Ranking $ranking): self
+    {
+        if ($this->rankings->removeElement($ranking)) {
+            // set the owning side to null (unless already changed)
+            if ($ranking->getUser() === $this) {
+                $ranking->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getGender(): ?bool
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?bool $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+
 }

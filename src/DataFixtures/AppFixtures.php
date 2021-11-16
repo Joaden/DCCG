@@ -5,7 +5,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Articles;
 use App\Entity\Categories;
-use App\Entity\Users;
+use App\Entity\Comments;
+use App\Entity\User;
+use App\Entity\UsersAddress;
+use App\Entity\UsersInfos;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
@@ -26,18 +29,53 @@ class AppFixtures extends Fixture
         $users = [];
 
         for ($i = 0; $i < 50; $i++) {
-            $user = new Users();
-            $user->setName($faker->name);
+            $user = new User();
             $user->setEmail($faker->email);
+            $user->setRoles($faker->randomElements([
+                '["ROLE_USER"]',
+                '["ROLE_WRITER"]',
+                '["ROLE_PREMIUM"]',
+                '["ROLE_MODERATOR"]'
+             ]));
             $user->setPassword($faker->password());
-            $user->setPseudo($faker->userName);
+            $user->setName($faker->name);
             $user->setIsVerified(0);
-            $user->setCreatedAt(new \DateTime());
+            $user->setPseudo($faker->userName);
             $user->setPhrase($faker->sentence($nbWords = 6, $variableNbWords = true));
             $manager->persist($user);
             $users[] = $user;
 
         }
+//
+//        $usersAddresses = [];
+//
+//        for ($i = 0; $i < 20; $i++) {
+//            $usersAddresse = new UsersAddress();
+//            $usersAddresse->setStreet($faker->streetAddress);
+//            $usersAddresse->setCp($faker->postcode);
+//            $usersAddresse->setCity($faker->city);
+//            $usersAddresse->setUser($users[$faker->numberBetween(0,20)]);
+//            $manager->persist($usersAddresse);
+//            $usersAddresses[] = $usersAddresse;
+//
+//        }
+
+//        $usersInfos = [];
+//
+//        for ($i = 0; $i < 20; $i++) {
+//            $usersInfo = new UsersInfos();
+//            $usersInfo->setIsValid($faker->numberBetween(0,1));
+//            $usersInfo->setBirth(new \DateTime());
+//            $usersInfo->setDateInscription(new \DateTime());
+//            $usersInfo->setPhone($faker->phoneNumber);
+//            $usersInfo->setIp($faker->ipv4);
+//            $usersInfo->setNewsletter($faker->numberBetween(0,1));
+//            $usersInfo->setUser($users[$faker->numberBetween(0,20)]);
+//
+//            $manager->persist($usersInfo);
+//            $usersInfos[] = $usersInfo;
+//
+//        }
 
 
         $categories = [];
@@ -56,20 +94,38 @@ class AppFixtures extends Fixture
 
         for ($i = 0; $i < 50; $i++) {
             $article = new Articles();
-            $article->setTitle($faker->text(30));
+            $article->setTitle($faker->text(20));
             $article->setContent($faker->text(3000));
             $article->setDate(new \DateTime());
-            $article->setAuthor($faker->name);
             $article->setOnline(1);
             $article->setSlug($faker->slug());
             $article->setEdition(new \DateTime());
             $article->setNbrView($faker->numberBetween(0,50));
             $article->setReport($faker->numberBetween(0,20));
-            $article->setCategoriesId($categories[$faker->numberBetween(0,30)]);
-            $article->setUserId($users[$faker->numberBetween(0,40)]);
+            $article->setCategorie($categories[$faker->numberBetween(0,20)]);
+            $article->setImage($faker->imageUrl());
+            $article->setCreatedAt(new \DateTime());
+            $article->setAuteur($users[$faker->numberBetween(0,20)]);
 
             $manager->persist($article);
             $articles[] = $article;
+
+        }
+
+        $comments = [];
+
+        for ($i = 0; $i < 50; $i++) {
+            $comment = new Comments();
+            $comment->setAuthor($faker->userName);
+            $comment->setComment($faker->text(300));
+            $comment->setDate(new \DateTime());
+            $comment->setApproved(1);
+            $comment->setReport($faker->numberBetween(0,5));
+            $comment->setAuteur($users[$faker->numberBetween(0,30)]);
+            $comment->setArticle($articles[$faker->numberBetween(0,20)]);
+
+            $manager->persist($comment);
+            $comments[] = $comment;
 
         }
 

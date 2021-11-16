@@ -1,0 +1,111 @@
+*{
+    font-family: 'Sriracha', cursive;
+    padding: 0;
+    margin: 0;
+
+}
+
+a,
+a:hover,
+a:focus{
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+
+}
+
+/* SIDEBAR */
+
+.wrapper{
+    display: flex;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar{
+    min-width: 250px;
+    max-width: 250px;
+
+}
+
+
+/*.navbar{*/
+
+    /*display: flex;*/
+/*}*/
+
+/*.navbar-expand-lg {*/
+    /*justify-content: flex-start;*/
+/*}*/
+
+/*.navbar.fixed-left{*/
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*z-index: 1030;*/
+    /*flex-flow: column nowrap;*/
+    /*align-items: flex-start;*/
+    /*right: auto;*/
+    /*width: 300px;*/
+    /*height: 100%;*/
+    /*border-radius: 0;*/
+    /*overflow-x: hidden;*/
+    /*padding-top: 20px;*/
+
+/*}*/
+
+
+/*.navbar-expand-lg .navbar-nav .nav-link {*/
+    /*padding: 6px 8px 6px 16px;*/
+    /*text-decoration: none;*/
+    /*font-size: 15px;*/
+    /*color: #818181;*/
+    /*display: block;*/
+
+/*}*/
+/*.navbar-nav .nav-link {*/
+    /*padding-top: 0.9rem;*/
+    /*padding-bottom: 0.9rem;*/
+/*}*/
+
+/*.navbar-collapse {*/
+    /*flex-grow: 0;*/
+    /*flex-direction: column;*/
+    /*width: 100%;*/
+/*}*/
+/*.navbar-expand-md .navbar-collapse {*/
+    /*display: -webkit-box !important;*/
+    /*display: -ms-flexbox !important;*/
+    /*display: flex !important;*/
+    /*-ms-flex-preferred-size: auto;*/
+    /*flex-basis: auto;*/
+/*}*/
+
+/*.navbar.fixed-left .navbar-collapse .navbar-nav {*/
+    /*flex-direction: column;*/
+    /*width: 100%;*/
+/*}*/
+
+/*.container {*/
+    /*width: 100%;*/
+    /*padding-right: 15px;*/
+    /*padding-left: 15px;*/
+    /*margin-right: auto;*/
+    /*margin-left: auto;*/
+/*}*/
+
+/*.navbar-fixed-left a:hover {*/
+/*color: rgba(209, 53, 104, 0.93);*/
+/*}*/
+/*#container-base{*/
+/*margin-left: 160px; *//* Same as the width of the sidenav */
+/*font-size: 28px; *//* Increased text to enable scrolling */
+/*padding: 0px 10px;*/
+/*}*/
+/*@media screen and (max-height: 450px){*/
+/*.navbar-fixed-left {padding-top: 15px;}*/
+/*.navbar-fixed-left a {font-size: 18px;}*/
+
+/*}*/
+
+

@@ -20,12 +20,12 @@ class Follow
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Users::class, inversedBy="follows")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="follows")
      */
     private $follower;
 
     /**
-     * @ORM\OneToOne(targetEntity=Users::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $followed;
@@ -41,14 +41,14 @@ class Follow
     }
 
     /**
-     * @return Collection|Users[]
+     * @return Collection|User[]
      */
     public function getFollower(): Collection
     {
         return $this->follower;
     }
 
-    public function addFollower(Users $follower): self
+    public function addFollower(User $follower): self
     {
         if (!$this->follower->contains($follower)) {
             $this->follower[] = $follower;
@@ -57,19 +57,19 @@ class Follow
         return $this;
     }
 
-    public function removeFollower(Users $follower): self
+    public function removeFollower(User $follower): self
     {
         $this->follower->removeElement($follower);
 
         return $this;
     }
 
-    public function getFollowed(): ?Users
+    public function getFollowed(): ?User
     {
         return $this->followed;
     }
 
-    public function setFollowed(Users $followed): self
+    public function setFollowed(User $followed): self
     {
         $this->followed = $followed;
 

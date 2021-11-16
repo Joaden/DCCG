@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticlesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,11 +33,6 @@ class Articles
      * @ORM\Column(type="datetime")
      */
     private $date;
-
-    /**
-     * @ORM\Column(type="string", length=50, nullable=true)
-     */
-    private $author;
 
     /**
      * @ORM\Column(type="boolean")
@@ -68,9 +65,39 @@ class Articles
     private $categorie;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="articles")
+     * @ORM\Column(type="string", length=255)
      */
-    private $User;
+    private $image;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $auteur;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comments::class, mappedBy="article")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Ranking::class, mappedBy="article")
+     */
+    private $rankings;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->rankings = new ArrayCollection();
+    }
+
+
+
 
     public function getId(): ?int
     {
@@ -109,18 +136,6 @@ class Articles
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?string $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -197,15 +212,101 @@ class Articles
         return $this;
     }
 
-    public function getUser(): ?Users
+    public function getImage(): ?string
     {
-        return $this->User;
+        return $this->image;
     }
 
-    public function setUser(?Users $User): self
+    public function setImage(string $image): self
     {
-        $this->User = $User;
+        $this->image = $image;
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): self
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comments[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Ranking[]
+     */
+    public function getRankings(): Collection
+    {
+        return $this->rankings;
+    }
+
+    public function addRanking(Ranking $ranking): self
+    {
+        if (!$this->rankings->contains($ranking)) {
+            $this->rankings[] = $ranking;
+            $ranking->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRanking(Ranking $ranking): self
+    {
+        if ($this->rankings->removeElement($ranking)) {
+            // set the owning side to null (unless already changed)
+            if ($ranking->getArticle() === $this) {
+                $ranking->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

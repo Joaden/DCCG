@@ -47,6 +47,12 @@ class UsersInfos
      */
     private $newsletter;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="usersInfos", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +126,18 @@ class UsersInfos
     public function setNewsletter(bool $newsletter): self
     {
         $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

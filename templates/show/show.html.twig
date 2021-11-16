@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Accueil {% endblock %}
+
+{% block body %}
+    <h1 class="brand-logo--big">
+        <a class="brand-logo_link" href="{{ path('home') }}"></a>
+    </h1>
+    <div class="container">
+        <div class="img-fluid">
+            <img src="{{ article.image }}" alt="{{ article.title }}"/>
+        </div>
+
+        {#<img class="blogArticle-imglink-img" src="https://source.unsplash.com/random/500x300" alt="image here"><a href="#"></a>#}
+        <p class="card-text">
+            {{ article.content }}
+        </p>
+        <span class="grey_dark">
+            Edité le  articles.date | date('d/m/Y')  à  articles.date | date('H:i')  dans la rubrique  articles.categorie_id
+        </span>
+    </div>
+
+    <div>
+        {#<a href="#" class="btn btn-link js-like">#}
+            {#{% if app.user and post.isLikedByUser(app.user) %}#}
+                {#<i class="fas fa-thumbs-up"></i>#}
+            {#{% else %}#}
+                {#<i class="far fa-thumbs-up"></i>#}
+            {#{% endif %}#}
+                {#<span class="js-likes">{{ post.likes | length }}</span>#}
+                {#<span class="js-label">J'aime</span>#}
+        {#</a>#}
+
+        {% if comments is defined %}
+            {% set counterCom = 0 %}
+            {% set counterNbrCom = 0 %}
+            {% for comments in comments %}
+                {% if comments.article.id == article.id %}
+                    {% set counterNbrCom = counterNbrCom + 1 %}
+                {% endif %}
+            {% endfor %}
+            <h4>Commentaires({{ counterNbrCom }})</h4>
+            {% for comments in comments %}
+
+                {% if comments.article.id == article.id %}
+                    <div class="row" id="blogComments"> Edité par
+                    {#{{ comments.user_id }}#}
+                    {{ comments.author }}
+                    {{ comments.content }} </div>
+                {% endif %}
+
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock %}

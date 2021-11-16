@@ -1,0 +1,96 @@
+ assets/css/header.css
+
+
+****************    HOME TITLE START      **********************************
+
+.titleSnake{
+    text-shadow: 1px 3px 3px #0da412;
+    text-decoration: none;
+    text-align: center;
+}
+
+****************    HOME TITLE END      **********************************
+
+
+****************    NAV MENU START      **********************************
+
+nav{
+    background-color: rgb(44, 31, 99);
+    background-color: #d204a8;
+
+}
+.block_bottom_footer .title{
+    font-weight: 700;
+}
+.block_bottom_footer .text_min{
+    color: #7c6b66;
+    font-size: 15px;
+}
+.link_bottom_footer{
+    color: #36B6AB;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 17px;
+    line-height: 29px;
+}
+.link_bottom_footer:hover {
+    color: #fdb814;
+    text-decoration: none;
+}
+.color_yellow{
+    color: #fdb814;
+    font-weight: 600;
+}
+.float_right{
+    float: right;
+}
+.full_size{
+    width: 100%;
+}
+.cookies{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,.8);
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    z-index: 15;
+}
+.navbar .navbar-toggler-icon {
+    background-image: url('https://mdbootstrap.com/img/svg/hamburger2.svg?color=fff');
+}
+
+.navbar li{
+    list-style: none;
+}
+.navbar-collapse.in {
+    overflow-y: hidden;
+}
+.navSpe{
+
+    float: right;
+}
+.menuSpe{
+    float: right;
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 18px;
+    color: #38b6ab;
+}
+@media (max-width: 768px) {
+    .img_mobile_full{
+        width: 100%
+    }
+    .modal-dialog{
+        width: 96%!important;
+    }
+}
+
+.navfrontsite{
+    font-size: 20px;
+}
+
+****************    NAV MENU END        **********************************

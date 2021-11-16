@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search Articles{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="example-wrapper">
+        <h1>Hello {{ controller_name }}! ✅</h1>
+
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/SYMFONY/DCCG/dccg/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
+            <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/SYMFONY/DCCG/dccg/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
+        </ul>
+        <h2> {{ "now"|date('d/m/Y', "Europe/Paris") }}</h2>
+        <div>
+            <a href="{{ path('search') }}" class="btn btn-success txt-white">Recherche avancée</a>
+        </div>
+    </div>
+
+<section class="articles">
+    {% if(articles is defined) %}
+
+        <div class="row">
+
+            {% for article in articles %}
+            {{ loop.index }}
+            {#<div class="container">#}
+
+            <div class="card" style="width: 18rem;">
+
+                <div class="card-body">
+                    <h3>{{ article.title }}</h3>
+
+                    <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random/500x300" alt="image here"><a href="#"></a>
+                    <p class="card-text">
+                        {{ article.content }}
+                    </p>
+                        <span class="grey_dark">
+                            Edité le  articles.date | date('d/m/Y')  à  articles.date | date('H:i')  dans la rubrique  articles.categorie_id
+                        </span>
+                    {#<div class="col-3 mb-3 ">#}
+                    {#<img src="http://placehold.it/350x150" alt=""/>#}
+                    {#{% for image in post.images %}#}
+                    {#<div class="caroulix-item" style="width: 100%">#}
+                    {#<img data-ax="lightbox" data-lightbox-caption="This is a caption" id="example-lightbox2" class="lightbox responsive-media" src="{{ asset('/uploads/'~image.name) }}" alt="img{{ image.id }}" width="150"/>#}
+                    {#</div>#}
+                    {#{% endfor %}#}
+
+
+                    <div>
+                        {#<button type="button" class="btn btn-success txt-white">#}
+                        <a href="{{path('show', {'id':article.id})}}" class="btn btn-success txt-white">
+                            Lire cet article
+                        </a>
+                        {#</button>#}
+                    </div>
+                    {#<a href="#" class="btn btn-link js-like">#}
+                    {#{% if app.user and post.isLikedByUser(app.user) %}#}
+                    {#<i class="fas fa-thumbs-up"></i>#}
+                    {#{% else %}#}
+                    {#<i class="far fa-thumbs-up"></i>#}
+                    {#{% endif %}#}
+                    {#<span class="js-likes">{{ post.likes | length }}</span>#}
+                    {#<span class="js-label">J'aime</span>#}
+                    {#</a>#}
+                </div>
+                {% if comments is defined %}
+                    {% set counterCom = 0 %}
+                    {% set counterNbrCom = 0 %}
+                    {% for comments in comments %}
+                        {% if comments.article.id == article.id %}
+                            {% set counterNbrCom = counterNbrCom + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    <h4>Commentaires({{ counterNbrCom }})</h4>
+                    {% for comments in comments %}
+
+                        {% if comments.article.id == article.id %}
+                            <div class="row" id="blogComments"> Edité par
+                                {#{{ comments.user_id }}#}
+                                {{ comments.author }}
+                                {{ comments.content }} </div>
+                        {% endif %}
+
+                    {% endfor %}
+                {% endif %}
+
+                </div>
+
+            {% endfor %}
+            </div>
+
+        {% endif %}
+
+
+</section>
+
+
+
+
+{% endblock %}
+
+
+
+

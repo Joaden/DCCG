@@ -42,6 +42,18 @@ class Comments
      */
     private $report;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     */
+    private $auteur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Articles::class, inversedBy="comments")
+     */
+    private $article;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,4 +118,29 @@ class Comments
 
         return $this;
     }
+
+    public function getAuteur(): ?User
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?User $auteur): self
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Articles
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Articles $article): self
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
 }

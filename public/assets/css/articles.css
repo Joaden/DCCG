@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    padding: 0;
+    /*background: #f1b0b7;*/
+
+}
+img{
+    margin: 20px;
+    padding: 20px;
+
+}
+.arrow_home{
+    display: block;
+    top: 0;
+    border-top: 26px solid #248bb6;
+    position: absolute;
+    margin-left: -26px;
+    width: 0;
+    height: 0;
+    border-left: 26px solid transparent;
+    border-right: 26px solid transparent;
+    left: 50%;
+    z-index: 5;
+}
+
+.hr_grey{
+    background: #7c6b66;
+    height: 1px;
+}
+.hr_purple{
+    background: #d204a8;
+    height: 1px;
+}
+.hr_yellow{
+    background: #fdb814;
+    height: 1px;
+}
+.espace{
+    margin: 5px;
+    padding: 5px;
+}

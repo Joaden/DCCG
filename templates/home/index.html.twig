@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home page{% endblock %}
 
 {% block body %}
 <style>
@@ -17,6 +17,9 @@
         <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/SYMFONY/DCCG/dccg/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
     </ul>
     <h2> {{ "now"|date('d/m/Y', "Europe/Paris") }}</h2>
+    <div>
+        <a href="{{ path('search') }}" class="btn btn-success txt-white">Recherche avancée</a>
+    </div>
 </div>
 
 <section class="articles">
@@ -49,7 +52,7 @@
 
                     <div>
                         {#<button type="button" class="btn btn-success txt-white">#}
-                        <a href="#" class="btn btn-success txt-white">
+                        <a href="{{path('show', {'id':article.id})}}" class="btn btn-success txt-white">
                             Lire cet article
                         </a>
                         {#</button>#}

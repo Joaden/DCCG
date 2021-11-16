@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Articles;
 use App\Entity\Categories;
-use App\Entity\Users;
 use App\Entity\User;
 
 class HomeController extends AbstractController
@@ -26,11 +25,28 @@ class HomeController extends AbstractController
 
 //       dd($articles);
 
+        $a = "Hello 1";
+        function foo(){
+            $a = "Hello 2";
+            global $a;
+            echo $a;
+            return $a;
+        }
+        //foo();
+
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Home Page Articles',
             'articles' => $articles,
             'categories' => $categories,
+            'foo' => $a,
+
 
         ]);
     }
+
+
+
+
+
 }

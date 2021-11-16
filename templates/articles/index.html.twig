@@ -17,4 +17,74 @@
         <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/SYMFONY/DCCG/dccg/templates/articles/index.html.twig'|file_link(0) }}">templates/articles/index.html.twig</a></code></li>
     </ul>
 </div>
+
+
+<section class="articles">
+    <div class="container">
+        <div class="row">
+            {% for article in articles %}
+
+            {{ loop.index }}
+                <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
+                    <a class="blogArticle-imglink" href="#">
+
+                        <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random/500x300" alt="image article">
+
+                        <!-- <img class="blogArticle-imglink-img" src="https://via.placeholder.com/500x300" alt="image here">
+                        <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random" alt="image here"><a href="article_read.php?id=<?= $article->id ?>"></a>
+                         <img class="blogArticle-imglink-img" src="http://jwilson.coe.uga.edu/emt668/EMAT6680.2002/Nooney/EMAT6600-ProblemSolving/MagicSquares(4x4)/image01.gif" alt="image here"> -->
+
+                    </a>
+                    <div class="blogArticle-content">
+                        <h2 class="blogArticle-title">
+                            <a href="article_read.php?id=<?= $article->id ?>">
+                                {{ article.title }}
+                            </a>
+                        </h2>
+                        <p class="blogArticle-text">
+                            {{ article.content }}
+                        </p>
+                        if categorie is defined =>
+                        <p class="col-lg-3 align-self-baseline text-lg-right">
+                                                        <span class="abrev">
+                                                            categorie
+                                                        </span>
+                        </p>
+                        <?php    }  ?>
+                        <div class="blogArticle-footer">
+                            <!-- v1 -->
+
+                            <div class="blogArticle-footer-infos row no-gutters flex-no-wrap">
+                                <p class="col-lg-6 align-self-baseline mb-0">
+                                    <span class="abrev">par</span>
+                                    <span class="pseudo">auteur_id</span>
+                                </p>
+                                <p class="col-lg-6 align-self-baseline text-lg-right">
+                                    <span class="abrev">date</span>
+                                    <span class="date">date</span>
+                                    <span class="hour"></span>
+                                </p>
+
+                            </div>
+
+                            <div class="blogArticle-footer-keywords row no-gutters">
+                                <a href="#" class="keyword">moto</a>
+                                <a href="#" class="keyword">vitesse</a>
+                                <a href="#" class="keyword">design</a>
+                                <a href="#" class="keyword">carrenage</a>
+                            </div>
+                        </div>
+                        <a href="{{path('show', {'id':article.id})}}" class="btn btn-success txt-white">
+                            Lire cet article
+                        </a>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
 {% endblock %}

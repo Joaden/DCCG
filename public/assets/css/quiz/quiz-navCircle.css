@@ -1,0 +1,41 @@
+/****************** RESET ****************************/
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+   /* border: 1px solid maroon;
+    width: 20px;
+    height: 20px;
+    border-radius: 80%; */
+    /* opacity: 20%; */
+    /* position: relative; */
+
+    /* display: grid;
+    align-items: center;
+    justify-items: center;
+    min-height: 100vh;
+    color: azure; */
+    /* background: lightgoldenrodyellow; */
+
+.button-nav{
+    align-items: center;
+    justify-items: center;
+    border: 1px solid rgba(121, 214, 0, 0.767);
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    /* opacity: 20%; */
+    /* position: relative; */
+}
+i{
+   /* padding-right: 50px;  */
+} 
+
+
+
+
+
+
+
