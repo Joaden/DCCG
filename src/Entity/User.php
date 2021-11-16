@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isVerified;
+    private $isVerified = false;
 
     /**
      * @ORM\Column(type="string", length=255)

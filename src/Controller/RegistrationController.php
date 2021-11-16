@@ -31,9 +31,9 @@ class RegistrationController extends AbstractController
             );
 
             // add role on user
-            $roles = $rolesRepository->findRolesByName('ROLE_USER');
+//            $roles = $rolesRepository->findRolesByName('ROLE_USER');
 
-            $user->setRoles($roles);
+//            $user->setRoles($roles);
             //            dd($user);
 
 
