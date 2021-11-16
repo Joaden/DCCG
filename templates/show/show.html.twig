@@ -2,23 +2,31 @@
 
 {% block title %} Accueil {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/articleShow.css') }}"/>
+{% endblock %}
+
 {% block body %}
     <h1 class="brand-logo--big">
         <a class="brand-logo_link" href="{{ path('home') }}"></a>
     </h1>
-    <div class="container">
-        <div class="img-fluid">
+    {#<div class="container">#}
+        <div class="box b1">
             <img src="{{ article.image }}" alt="{{ article.title }}"/>
         </div>
 
+        <div class="box b2">
+            <img src="https://source.unsplash.com/random/640x480" alt="{{ article.title }}"/>
+        </div>
+
         {#<img class="blogArticle-imglink-img" src="https://source.unsplash.com/random/500x300" alt="image here"><a href="#"></a>#}
-        <p class="card-text">
+        <p class="box-text">
             {{ article.content }}
         </p>
         <span class="grey_dark">
             Edité le  articles.date | date('d/m/Y')  à  articles.date | date('H:i')  dans la rubrique  articles.categorie_id
         </span>
-    </div>
+    {#</div>#}
 
     <div>
         {#<a href="#" class="btn btn-link js-like">#}

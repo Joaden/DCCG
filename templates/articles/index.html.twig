@@ -26,7 +26,7 @@
 
             {{ loop.index }}
                 <div class="blogArticle--medium row   col-lg-6 col-xl-4 px-5 my-5">
-                    <a class="blogArticle-imglink" href="#">
+                    <a class="blogArticle-imglink" href="{{path('show', {'id':article.id})}}">
 
                         <img class="blogArticle-imglink-img" src="https://source.unsplash.com/random/500x300" alt="image article">
 
