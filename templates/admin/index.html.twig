@@ -9,7 +9,7 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Index Admin</h1>
 
     This friendly message is coming from:
     <ul>
@@ -17,4 +17,72 @@
         <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/SYMFONY/DCCG/dccg/templates/admin/index.html.twig'|file_link(0) }}">templates/admin/index.html.twig</a></code></li>
     </ul>
 </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <a class="navbar-brand" href="{{ path('home') }}">DAOS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+
+            <ul  class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle  text-danger" data-toggle="dropdown" href="{{ path('admin_index') }}" role="button" aria-haspopup="true" aria-expanded="false">Back-Office</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">ADMINISTRATION</a>
+                        <a class="dropdown-item" href="{{ path('admin_users') }}">Manage Users</a>
+                        <a class="dropdown-item" href="#">Manage Products</a>
+                        <a class="dropdown-item" href="#">Manage Categories</a>
+                        <a class="dropdown-item" href="#">Manage Categories Health</a>
+                        <a class="dropdown-item" href="#">Manage Blog</a>
+                        <a class="dropdown-item" href="#">Admin Blog</a>
+                        <a class="dropdown-item" href="#">Manage Forum</a>
+                        <a class="dropdown-item" href="#">Manage Annonces</a>
+                        <a class="dropdown-item" href="#">Admin Annonces<span class="sr-only"></span></a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Edit Mailing</a>
+                        <a class="dropdown-item" href="{{ path('home') }}">Manage Site Daos</a>
+                    </div>
+                </li>
+            </ul>
+
+            {% if app.user is defined %}
+            {% if app.user %}
+            <ul  class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> {{ app.user.email }} / Mon Compte</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">My Wishlist</a>
+                        <a class="dropdown-item" href="#">My Profil</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">My Cart</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
+                </li>
+
+                {% else %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="{% if app.request.attributes.get('_route') == 'app_login' %}nav-item active{% else %}nav-item{% endif %}">
+                        <a class="nav-link" href="{{path('app_login')}}">Se connecter</a>
+                    </li>
+                    <li class="{% if app.request.attributes.get('_route') == 'app_register' %}nav-item active{% else %}nav-item{% endif %}">
+                        <a class="nav-link" href="{{ path('app_register') }}">S'inscrire</a>
+                    </li>
+
+                    {% endif %}
+                    {% endif %}
+                </ul>
+            </ul>
+
+        </div>
+    </nav>
+
+
+
+
 {% endblock %}
