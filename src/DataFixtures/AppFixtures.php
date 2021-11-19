@@ -26,26 +26,26 @@ class AppFixtures extends Fixture
 
         // use the factory to create a Faker\Generator instance
         $faker = Faker\Factory::create();
-        $users = [];
-
-        for ($i = 0; $i < 50; $i++) {
-            $user = new User();
-            $user->setEmail($faker->email);
-            $user->setRoles($faker->randomElements([
-                '["ROLE_USER"]',
-                '["ROLE_WRITER"]',
-                '["ROLE_PREMIUM"]',
-                '["ROLE_MODERATOR"]'
-             ]));
-            $user->setPassword($faker->password());
-            $user->setName($faker->name);
-            $user->setIsVerified(0);
-            $user->setPseudo($faker->userName);
-            $user->setPhrase($faker->sentence($nbWords = 6, $variableNbWords = true));
-            $manager->persist($user);
-            $users[] = $user;
-
-        }
+//        $users = [];
+//
+//        for ($i = 0; $i < 50; $i++) {
+//            $user = new User();
+//            $user->setEmail($faker->email);
+//            $user->setRoles($faker->randomElements([
+//                '["ROLE_USER"]',
+//                '["ROLE_WRITER"]',
+//                '["ROLE_PREMIUM"]',
+//                '["ROLE_MODERATOR"]'
+//             ]));
+//            $user->setPassword($faker->password());
+//            $user->setName($faker->name);
+//            $user->setIsVerified(0);
+//            $user->setPseudo($faker->userName);
+//            $user->setPhrase($faker->sentence($nbWords = 6, $variableNbWords = true));
+//            $manager->persist($user);
+//            $users[] = $user;
+//
+//        }
 //
 //        $usersAddresses = [];
 //

@@ -25,21 +25,21 @@ class HomeController extends AbstractController
 
 //       dd($articles);
 
-        $a = "Hello 1";
-        function foo(){
-            $a = "Hello 2";
-            global $a;
-            echo $a;
-            return $a;
-        }
+//        $a = "Hello 1";
+//        function foo(){
+//            $a = "Hello 2";
+//            global $a;
+//            echo $a;
+//            return $a;
+//        }
         //foo();
 
 
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'Home Page Articles',
+//            'controller_name' => 'Bienvenue sur le site',
             'articles' => $articles,
             'categories' => $categories,
-            'foo' => $a,
+//            'foo' => $a,
 
 
         ]);
